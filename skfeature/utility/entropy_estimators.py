@@ -1,3 +1,6 @@
+from __future__ import print_function
+from __future__ import division
+# from builtins import (dict, int, list,  range,  map, zip)
 # Written by Greg Ver Steeg (http://www.isi.edu/~gregv/npeet.html)
 
 import scipy.spatial as ss
@@ -116,7 +119,7 @@ def hist(sx):
     d = dict()
     for s in sx:
         d[s] = d.get(s, 0) + 1
-    return map(lambda z: float(z)/len(sx), d.values())
+    return list(map(lambda z: float(z)/len(sx), d.values()))
 
 
 def entropyfromprobs(probs, base=2):
@@ -151,7 +154,7 @@ def micd(x, y, k=3, base=2, warning=True):
             mi -= word_dict[yval]*entropy(xgiveny, k, base)
         else:
             if warning:
-                print("Warning, after conditioning, on y={0} insufficient data. Assuming maximal entropy in this case.".format(yval))
+                print("Warning, after conditioning, on y=", yval, " insufficient data. Assuming maximal entropy in this case.")
             mi -= word_dict[yval]*overallentropy
     return mi  # units already applied
 
@@ -204,4 +207,4 @@ def avgdigamma(points, dvec):
 def zip2(*args):
     # zip2(x,y) takes the lists of vectors and makes it a list of vectors in a joint space
     # E.g. zip2([[1],[2],[3]],[[4],[5],[6]]) = [[1,4],[2,5],[3,6]]
-    return [sum(sublist, []) for sublist in zip(*args)]
+    return [sum(sublist, []) for sublist in list(zip(*args))]

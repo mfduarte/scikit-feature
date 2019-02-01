@@ -1,3 +1,5 @@
+from __future__ import print_function
+from __future__ import division
 import scipy.io
 from sklearn.metrics import accuracy_score
 from sklearn import cross_validation
@@ -24,7 +26,7 @@ def main():
     correct = 0
     for train, test in ss:
         # obtain the index of each feature on the training set
-        idx,_,_ = CMIM.cmim(X[train], y[train], n_selected_features=num_fea)
+        idx = CMIM.cmim(X[train], y[train], n_selected_features=num_fea)
 
         # obtain the dataset on the selected features
         features = X[:, idx[0:num_fea]]
@@ -40,7 +42,7 @@ def main():
         correct = correct + acc
 
     # output the average classification accuracy over all 10 folds
-    print 'Accuracy:', float(correct)/10
+    print('Accuracy:', float(correct)/10)
 
 if __name__ == '__main__':
     main()
